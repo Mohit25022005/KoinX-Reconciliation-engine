@@ -68,9 +68,11 @@ export async function ingestTransactions(
 
                 fee: toDecimal(row.fee),
 
-                timestamp: row.timestamp
-                    ? new Date(row.timestamp)
-                    : null,
+                timestamp:
+                    row.timestamp &&
+                        !isNaN(Date.parse(row.timestamp))
+                        ? new Date(row.timestamp)
+                        : null,
 
                 rawData: row,
 
