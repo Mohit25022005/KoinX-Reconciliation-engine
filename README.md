@@ -251,6 +251,21 @@ npm run start    # Run compiled production build
 
 ---
 
+## Run Using Docker
+
+```bash
+docker-compose up --build
+```
+
+---
+#  Test Docker
+
+Run:
+
+```bash id="9jlwmv"
+docker-compose up --build
+```
+
 ## Future Improvements
 
 - Swagger/OpenAPI documentation
