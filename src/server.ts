@@ -21,6 +21,12 @@ async function bootstrap() {
         fs.mkdirSync("uploads");
     }
 
+    // Ensure reports directory exists
+
+    if (!fs.existsSync("reports")) {
+        fs.mkdirSync("reports");
+    }
+
     app.use(cors());
 
     app.use(express.json());
