@@ -257,14 +257,6 @@ npm run start    # Run compiled production build
 docker-compose up --build
 ```
 
----
-#  Test Docker
-
-Run:
-
-```bash id="9jlwmv"
-docker-compose up --build
-```
 
 ## Future Improvements
 
