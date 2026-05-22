@@ -13,7 +13,7 @@ import { reconcileTransactions } from "../services/reconciliation.service";
 import { TransactionSource } from "../constants/transaction";
 
 import { ReconciliationRunModel } from "../models/reconciliation-run.model";
-
+import { generateCsvReport } from "../services/report-export.service";
 import {
     getReportByRunId,
     getSummaryByRunId,
@@ -254,4 +254,29 @@ export async function getUnmatched(
                 "Failed to fetch unmatched transactions",
         });
     }
+}
+
+export async function downloadReportCsv(
+  req: Request,
+  res: Response
+) {
+  try {
+    const runId = String(
+      req.params.runId
+    );
+
+    const filePath =
+      await generateCsvReport(runId);
+
+    return res.download(filePath);
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+
+      message:
+        "Failed to generate CSV report",
+    });
+  }
 }

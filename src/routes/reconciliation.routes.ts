@@ -3,51 +3,57 @@ import { Router } from "express";
 import multer from "multer";
 
 import {
-  reconcile,
-  getReport,
-  getSummary,
-  getUnmatched,
+    reconcile,
+    getReport,
+    getSummary,
+    getUnmatched,
+    downloadReportCsv,
 } from "../controllers/reconciliation.controller";
 
 const router = Router();
 
 const upload = multer({
-  dest: "uploads/",
+    dest: "uploads/",
 });
 
 router.post(
-  "/reconcile",
+    "/reconcile",
 
-  upload.fields([
-    {
-      name: "user_transactions",
+    upload.fields([
+        {
+            name: "user_transactions",
 
-      maxCount: 1,
-    },
+            maxCount: 1,
+        },
 
-    {
-      name: "exchange_transactions",
+        {
+            name: "exchange_transactions",
 
-      maxCount: 1,
-    },
-  ]),
+            maxCount: 1,
+        },
+    ]),
 
-  reconcile
+    reconcile
 );
 
 router.get(
-  "/report/:runId",
-  getReport
+    "/report/:runId",
+    getReport
 );
 
 router.get(
-  "/report/:runId/summary",
-  getSummary
+    "/report/:runId/summary",
+    getSummary
 );
 
 router.get(
-  "/report/:runId/unmatched",
-  getUnmatched
+    "/report/:runId/unmatched",
+    getUnmatched
+);
+
+router.get(
+    "/report/:runId/csv",
+    downloadReportCsv
 );
 
 export default router;
